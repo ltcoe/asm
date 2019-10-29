@@ -1,0 +1,24 @@
+.model small
+.data
+arr db 02h,34h,0Ah,27h,33h,55h
+.code
+MOV AX,@data
+MOV DS,AX
+
+MOV AL,00h
+MOV CL,06h
+LEA BX,arr
+
+l2: cmp al,[bx]
+    jnc l1
+    mov al,[bx]
+    
+l1: inc bx
+    dec cl
+    cmp cl,00h
+    jnz l2
+    
+mov ah,4ch
+int 21h
+
+ends

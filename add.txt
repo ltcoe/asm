@@ -1,0 +1,70 @@
+16 bit addition
+
+org 100h
+.model small
+.data
+n1 dw 1212h
+n2 dw 1212h
+.code
+mov ax,@data
+mov ds,ax
+mov ax,n1
+mov bx,n2
+add ax,bx
+mov ah,4ch
+int 21h
+end
+
+-------------------------------------------
+16 bit subraction
+
+org 100h
+.model small
+.data
+n1 dw 1232h
+n2 dw 1212h
+.code
+mov ax,@data
+mov ds,ax
+mov ax,n1
+mov bx,n2
+sub ax,bx
+mov ah,4ch
+int 21h
+end
+
+
+---------------------------------------------------
+16bit multiplication
+
+org 100h
+.model small
+.data
+num1 dw 0006h
+num2 db 03h
+.code
+mov ax,@data
+mov ds,ax
+mov ax,num1
+mov bl ,num2
+mul bl
+mov ah,4ch
+int 21h
+ends
+
+-----------------------------------------------
+16 bit division
+org 100h
+.model small
+.data
+num1 dw 0006h
+num2 db 03h
+.code
+mov ax,@data
+mov ds,ax
+mov ax,num1
+mov bl ,num2
+div bl
+mov ah,4ch
+int 21h
+ends

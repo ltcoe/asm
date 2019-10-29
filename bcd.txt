@@ -1,0 +1,28 @@
+.data
+bcd db 84
+hex db ?
+
+.code
+mov bl,bcd
+mov al,bl
+and bl,ofh
+and al,ofoh
+mov cl,04
+rol al,cl
+mov bh,0ah
+mul bh
+adc al,bl
+mov hex,al
+
+.data 
+arr1 db 10,02,05,16,60h
+arr2 db ?
+
+mov ax,@data
+mov ds,ax
+mov cx,ax
+mov ah,4ch
+int 21h
+end
+
+ret
