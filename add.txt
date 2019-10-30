@@ -42,12 +42,15 @@ org 100h
 .data
 num1 dw 0006h
 num2 db 03h
+c dd ?
 .code
 mov ax,@data
 mov ds,ax
 mov ax,num1
 mov bl ,num2
 mul bl
+mov word ptr c,ax
+mov word ptr c+2,dx
 mov ah,4ch
 int 21h
 ends
