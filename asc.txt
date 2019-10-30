@@ -1,35 +1,21 @@
-
-org 100h
-
+.model small
 .data
-arr db 05h,16h,12h,08h
-count dw 04h
+array db 15h,05h,01h,98h,08h
 
 .code
-mov ax,@data
+mov ax ,@data
 mov ds,ax
-
-mov cx,count
-dec cx   ;as comparison is one less than total arr elements
-
-nextscan: mov bx,cx  ;imp
-          lea si,arr  
-          
-nextcmp: mov al,[si]
-         mov dl,[si+1]
-         cmp al,dl
-         jc noswap
-         mov [si],dl
-         mov [si+1],al
-                  
-noswap:  inc si
-         dec bx
-         jnz nextcmp
-         loop nextscan         
-
-
-ret
-
-
-
-
+mov bl,05h
+step1:
+mov si,offset array
+mov cl,04h
+step:mov al,[si]
+cmp al,[si+1]
+jc down
+xchg al,[si+1]
+xchg al,[si]
+down:add si,1
+loop step
+dec bl
+jnz step1 
+int 21h
