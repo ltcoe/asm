@@ -7,14 +7,11 @@ arr2 db ?
 .code
 mov ax,@data
 mov ds,ax
-mov es,ax
-lea si,arr1
-lea di,arr2
-mov cx,0005
+mov es,ax 
+mov cx,5
+mov si,offset arr1
+mov di,offset arr2
 cld
 rep movsb
-mov ah,4ch
 int 21h
 end
-
-ret
