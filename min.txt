@@ -1,34 +1,23 @@
-
-
-org 100h
-
 .model small
 .data
-arr db 05h,32h,03h,02h,64h,44h
+ar db 23h,04h,05h,02h
+small db ?
 
 .code
-MOV AX,@data
-MOV DS,AX
-LEA BX,arr
+mov ax,@data
+mov ds,ax
+mov cx,04h
+mov bl,79h
+lea si,ar
+up:
+mov al,[si]
+cmp al,bl
+jge nxt
+mov bl,al
+nxt:
+inc si
+dec cx
+jnz up
 
-MOV al,0ffh
-MOV cl,06h
-
-l2: cmp al,[bx]
-    jc l1
-    mov al,[bx]
-
-
-l1: inc bx
-    dec cl
-    cmp cl,00h
-    jnz l2 
-    
-mov ah,4ch
-int 21h
-    
-ret
-
-
-
-
+mov small,bl
+int 3h
