@@ -5,22 +5,24 @@ org 100h
 .data
 n1 dd 22524454h
 n2 dd 12123434h
+c dw ?
 
 .code
 MOV AX,@data
 MOV DS,AX
-
+mov dl,00h
 MOV AX,word ptr n1
 MOV BX,word ptr n2
 SUB AX,BX
-MOV BX,AX
+mov word ptr c,ax
 MOV AX,word ptr n1+2
 MOV CX,word ptr n2+2
 SBB AX,CX ; AX has upper 16 bit result and BX has lower 16 bit
-
-MOV ah,4ch
-int 21h
-
+mov word ptr c+2,ax
+jnc move
+inc dl
+move: mov byte ptr c+4,dl
+int 3
 ret
 
 
