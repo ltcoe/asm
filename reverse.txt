@@ -1,41 +1,19 @@
-org 100h
-
+.model small
 .data
-str1 db "hello$"
-str2 db 6 dup ('$')
-
-msg1 db 10,13,'stored string is : $ '
-msg2 db 10,13, 'reversed string is : $ '
-
-Display macro msg
-	mov ah, 9
-	lea dx, msg
-	int 21h
-Endm
+str1 db "yash$"
+rev db 5 DUP(?)
 
 .code
-
-mov ax, @data 
+mov ax,@data
 mov ds,ax
-Display msg1
-Display str1
-
-lea si,str2
-lea di,str1
-add di, 4
-mov cx, 5
-
-Reverse:
-mov al,[di]
-mov [si], al
+lea si,str1
+mov cl,05h
+lea di,rev
+add di,05h
+up:mov al,[si]
+mov [di],al
 inc si
-dec di
-loop Reverse
-
-Display msg2
-Display str2
-
-mov ah,4ch
+decdi
+dec cl
+jnz up
 int 21h
-
-ret
